@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { TEMPLATES } from '@/remotion/index';
-import { Play, Video, Sparkles, Zap, Shield } from 'lucide-react';
+import { TEMPLATES_CONFIG as TEMPLATES } from '@/lib/templates';
+import { Video, Sparkles, Zap, Shield, Play } from 'lucide-react';
 
 export default function Home() {
   return (

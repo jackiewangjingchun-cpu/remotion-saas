@@ -1,21 +1,15 @@
-import { Composition } from 'remotion';
-import { BirthdayTemplate } from './templates/Birthday';
-import { ProductShowcaseTemplate } from './templates/ProductShowcase';
-import { DataReportTemplate } from './templates/DataReport';
-import { SocialPromoTemplate } from './templates/SocialPromo';
+// 模板配置（纯数据，服务端可用）
 
-// 模板配置
-export const TEMPLATES = [
+export const TEMPLATES_CONFIG = [
   {
     id: 'birthday',
     name: '生日祝福',
     description: '温馨的生日祝福视频，适合送给朋友和家人',
     thumbnail: '/templates/birthday.jpg',
-    duration: 150, // 2.5秒
+    duration: 150,
     fps: 30,
     width: 1080,
-    height: 1920, // 竖屏
-    component: BirthdayTemplate,
+    height: 1920,
     defaultProps: {
       name: '小明',
       age: 25,
@@ -33,8 +27,7 @@ export const TEMPLATES = [
     duration: 180,
     fps: 30,
     width: 1920,
-    height: 1080, // 横屏
-    component: ProductShowcaseTemplate,
+    height: 1080,
     defaultProps: {
       productName: '超级产品',
       tagline: '改变你的生活',
@@ -53,8 +46,7 @@ export const TEMPLATES = [
     duration: 200,
     fps: 30,
     width: 1080,
-    height: 1080, // 方形
-    component: DataReportTemplate,
+    height: 1080,
     defaultProps: {
       title: '2024年度报告',
       subtitle: '公司业绩增长情况',
@@ -76,7 +68,6 @@ export const TEMPLATES = [
     fps: 30,
     width: 1080,
     height: 1350,
-    component: SocialPromoTemplate,
     defaultProps: {
       headline: '限时优惠！',
       discount: '50% OFF',
@@ -88,25 +79,5 @@ export const TEMPLATES = [
   },
 ];
 
-// Remotion Root
-export const RemotionRoot = () => {
-  return (
-    <>
-      {TEMPLATES.map((template) => {
-        const Component = template.component as any;
-        return (
-          <Composition
-            key={template.id}
-            id={template.id}
-            component={Component}
-            durationInFrames={template.duration}
-            fps={template.fps}
-            width={template.width}
-            height={template.height}
-            defaultProps={template.defaultProps}
-          />
-        );
-      })}
-    </>
-  );
-};
+// 导出兼容旧代码
+export const TEMPLATES = TEMPLATES_CONFIG;

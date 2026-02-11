@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { TEMPLATES } from '@/remotion/index';
-import { ArrowLeft, Play, Download, CreditCard } from 'lucide-react';
+import { TEMPLATES_CONFIG as TEMPLATES } from '@/lib/templates';
+import { ArrowLeft, Play, CreditCard } from 'lucide-react';
 
 export default function EditorPage() {
   const params = useParams();
@@ -16,11 +16,11 @@ export default function EditorPage() {
     return <div>Template not found</div>;
   }
 
-  const [params, setParams] = useState(template.defaultProps);
+  const [templateParams, setTemplateParams] = useState(template.defaultProps);
   const [isGenerating, setIsGenerating] = useState(false);
 
   const handleParamChange = (key: string, value: string | number) => {
-    setParams(prev => ({ ...prev, [key]: value }));
+    setTemplateParams(prev => ({ ...prev, [key]: value }));
   };
 
   const handleGenerate = () => {
@@ -78,7 +78,7 @@ export default function EditorPage() {
             <h2 className="text-xl font-semibold text-white mb-6">自定义内容</h2>
             
             <div className="space-y-4">
-              {Object.entries(params).map(([key, value]) => {
+              {Object.entries(templateParams).map(([key, value]) => {
                 // 跳过复杂类型
                 if (typeof value === 'object') return null;
                 
@@ -124,11 +124,11 @@ export default function EditorPage() {
                 className="w-full py-4 bg-purple-500 text-white rounded-xl font-semibold hover:bg-purple-600 transition disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 {isGenerating ? (
-                  <>🎬 生成中... (</span>
+                  <span>🎬 生成中...</span>
                 ) : (
                   <>
                     <Play className="w-5 h-5" />
-                    生成视频 - ${template.price}
+                    <span>生成视频 - ${template.price}</span>
                   </>
                 )}
               </button>
